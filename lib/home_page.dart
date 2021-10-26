@@ -6,10 +6,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Catalog App")),
       // ignore: avoid_unnecessary_containers
       body: Center(
         child: Text("Welcome to $day day of flutter tutorial by $name"),
       ),
+      drawer: Drawer(),
     );
   }
 }
