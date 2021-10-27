@@ -12,9 +12,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        body: Column(
+      child: Material(
+        color: Colors.white,
+        child: Column(
           children: [
             Image.asset("assets/images/login.png"),
             SizedBox(height: 20),
@@ -35,6 +35,7 @@ class _LoginPageState extends State<LoginPage> {
                         hintText: "Enter Username", labelText: "Username"),
                   ),
                   TextFormField(
+                    obscureText: true,
                     decoration: InputDecoration(
                         hintText: "Enter Password", labelText: "Password"),
                   ),
