@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tutorial/Utils/Routs.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -10,6 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String name = "";
+  bool onclick = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -21,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
               Image.asset("assets/images/login.png"),
               SizedBox(height: 20),
               Text(
-                "Welcome",
+                "Welcome $name",
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
@@ -33,6 +34,10 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   children: [
                     TextFormField(
+                      onChanged: (Value) {
+                        name = Value;
+                        setState(() {});
+                      },
                       decoration: InputDecoration(
                           hintText: "Enter Username", labelText: "Username"),
                     ),
@@ -44,14 +49,47 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(
                       height: 30,
                     ),
-                    ElevatedButton(
-                        style: TextButton.styleFrom(minimumSize: Size(100, 30)),
-                        onPressed: () {
-                          Navigator.pushNamed(context, MyRoutes.HomeRoute);
-                        },
-                        child: Text(
-                          "Login",
-                        ))
+                    InkWell(
+                      onTap: () async {
+                        setState(() {
+                          onclick = true;
+                        });
+                        await Future.delayed(Duration(seconds: 1));
+                        Navigator.pushNamed(context, MyRoutes.HomeRoute);
+                      },
+                      child: AnimatedContainer(
+                        duration: Duration(seconds: 2),
+                        alignment: Alignment.center,
+                        height: 40,
+                        width: onclick ? 60 : 140,
+                        decoration: BoxDecoration(
+                            color: Colors.deepPurpleAccent,
+                            // shape: onclick ? BoxShape.circle : BoxShape.rectangle,
+                            borderRadius:
+                                BorderRadius.circular(onclick ? 40 : 10)),
+                        child: onclick
+                            ? Icon(
+                                Icons.done,
+                                color: Colors.white,
+                              )
+                            : Text(
+                                "Login",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                      ),
+                    )
+                    // ElevatedButton(
+                    //     style: TextButton.styleFrom(minimumSize: Size(100, 30)),
+                    //     onPressed: () {
+                    //       Navigator.pushNamed(context, MyRoutes.HomeRoute);
+                    //     },
+                    //     child: Text(
+                    //       "Login",
+                    //     ))
                   ],
                 ),
               )
